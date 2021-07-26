@@ -47,7 +47,7 @@ function yScale(healthData, chosenYAxis) {
     // create scales
     var yLinearScale = d3.scaleLinear()
         .domain([0,
-        d3.max(healthData, d => d[chosenYAxis]) * 1.05
+            d3.max(healthData, d => d[chosenYAxis]) * 1.01
         ])
         .range([height, 0]);
 
@@ -144,10 +144,13 @@ d3.csv("./assets/data/data.csv").then(function (healthData, err) {
     // xLinearScale function above csv import
     var xLinearScale = xScale(healthData, chosenXAxis);
 
-    // Create y scale function
-    var yLinearScale = d3.scaleLinear()
-        .domain([0, d3.max(healthData, d => d.healthcare)])
-        .range([height, 0]);
+    // yLinearScale function above csv import
+    var yLinearScale = yScale(healthData, chosenYAxis);
+
+    // // Create y scale function
+    // var yLinearScale = d3.scaleLinear()
+    //     .domain([0, d3.max(healthData, d => d.healthcare)])
+    //     .range([height, 0]);
 
     // Create initial axis functions
     var bottomAxis = d3.axisBottom(xLinearScale);
@@ -261,7 +264,7 @@ d3.csv("./assets/data/data.csv").then(function (healthData, err) {
                         .classed("active", true)
                         .classed("inactive", false);
                 }
-                if (chosenXAxis === "poverty"){
+                if (chosenXAxis === "poverty") {
                     ageLabel
                         .classed("active", false)
                         .classed("inactive", true);
